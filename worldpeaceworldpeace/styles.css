@@ -1,0 +1,161 @@
+/* styles.css */
+
+* {
+  cursor: url('sym46.png'), crosshair !important;
+}
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.header-img {
+  max-height: 18px;
+  max-width: 25px;
+}
+
+body {
+  margin: 5px;
+  padding: 5px;
+  color: white;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #00FFFF; /* Cyan for bright, funky color */
+  font-size: 30px; /* Increase font size for readability */
+  font-family: 'Comic Sans MS', 'Chalkboard SE', 'Marker Felt'; /* Goofy, artistic aesthetic */
+  background-color: #FF4500; /* Orange red background for contrast and readability */
+  padding: 10px; /* Some padding for aesthetics */
+  font-weight: bold;
+  text-shadow: 2px 2px black;
+  padding-left: 1%;
+  padding-right: 1%;
+  border: 5px dashed yellow; /* Add a funky border */
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.5); /* Add some box shadow for depth */
+}
+
+
+
+.menu a {
+  color: #1c14ff; /* Deep pink for bright, funky color */
+  font-size: 30px; /* Increase font size for readability */
+  transition: color 0.3s ease; /* Transition for smooth hover effect */
+  text-decoration: none; /* Remove underline */
+  padding-left: 1%;
+  padding-right: 1%;
+  display: inline-block; /* Required for padding to take effect */
+  border-radius: 5px; /* Rounded corners for a funky look */
+  background-color: aquamarine;
+}
+
+.menu a:hover {
+  color: #00FF00; /* Change color to lime on hover */
+  transform: scale(2); /* Increase size on hover */
+}
+
+.rainbow-text {
+  font-size: 3rem;
+  text-shadow: none;
+  background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.img-background {
+  background-image: url("opiumrug.png");
+  background-size: 50%;
+  background-color: #834b58;
+  height: 100%;
+  width: 100%;
+}
+
+.content-area {
+
+  margin-left: 5%;
+  margin-right: 5%;
+  background-color: rgba(0, 0, 0, 0.829);
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  /* Added */
+}
+
+.image {
+  flex: 1;
+
+  /* Adjust the value as needed */
+  height: auto;
+}
+
+.text {
+  flex: 1;
+  /* Added */
+}
+
+.cursed {
+  background-color: white;
+  margin-right: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.text p {
+  color: #FF69B4; /* Hot pink for bright, funky color */
+  font-size: 2rem; /* Increase font size for readability */
+  font-weight: bold;
+  text-shadow: 2px 2px black;
+  white-space: normal;
+  line-height: 1.5;
+  word-wrap: break-word;
+  font-family: 'Comic Sans MS', 'Chalkboard SE', 'Marker Felt'; /* Goofy, artistic aesthetic */
+  background-color: #FFFF00; /* Yellow background for contrast and readability */
+  padding: 10px; /* Some padding for aesthetics */
+}
+
+.rainbow-text-shadow {
+  text-align: center;
+  margin-top: 2.5rem;
+  font-size: 1.5rem;
+  font-weight: 100;
+  color: rgb(0, 0, 0);
+  letter-spacing: 8px;
+}
+
+.footer {
+  color: #fff;
+  text-align: left;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  font-size: 24px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-shadow: 2px 2px #ff0000, -2px -2px #00ff00, 2px -2px #0000ff, -2px 2px #ffff00;
+}
+
+
+.video-wrapper {
+  display: flex;
+  justify-content: space-between;
+  /* Optional: Adds space between the videos */
+}
+
+.video-container {
+  position: relative;
+  width: 45%;
+  /* Adjust this to change the default size */
+  height: 0;
+  padding-bottom: 25.125%;
+  /* Adjust this to maintain the aspect ratio */
+  background-color: black;
+}
+
+.video-container video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

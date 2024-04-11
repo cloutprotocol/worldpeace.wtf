@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="styles.css">
+<link rel="shortcut icon" href="funnypictures/IMG_2183.jpeg" />
+<title>OPIUM Gallery</title>
+<style>.gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .gallery .img-container {
+            width: 128px;
+            height: 128px;
+            margin: 2px;
+            cursor: pointer;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 128px 128px;
+            image-rendering: pixelated;
+        }
+
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            text-align: center;
+        }
+
+        #overlay .img-container {
+            width: 512px;
+            height: 512px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-size: 512px 512px;
+            image-rendering: pixelated;
+        }
+
+        #overlay:target {
+            display: block;
+        }
+        
+        #fileName {
+            font-family: monospace;
+            font-size: 16px;
+            color: white;
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+<body class="img-background">
+<div class="menu">
+<a href="index.html">GO BACK HOME</a>
+</div>
+<br>
+<div class="gallery" id="gallery"></div>
+<div id="overlay">
+<div class="img-container" id="overlayImage"></div>
+<div id="fileName"></div>
+</div>
+<script>
+    const gallery = document.getElementById("gallery");
+    const overlay = document.getElementById("overlay");
+    const overlayImage = document.getElementById("overlayImage");
+    const fileName = document.getElementById("fileName"); // Get the file name element
+    let scrollPosition = 0;
+
+    for (let i = 1; i <= 777; i++) {
+        const imgContainer = document.createElement("div");
+        imgContainer.classList.add("img-container");
+
+            imgContainer.style.backgroundImage = `url(opium/${String(i).padStart(0, "0")}.png)`;
+
+        imgContainer.addEventListener("click", () => {
+            const fileExtension = '.png';
+            const fileNameText = `${String(i).padStart(0, "0")}${fileExtension}`; // Prepare the file name text
+            fileName.textContent = fileNameText; // Set the file name text
+            overlayImage.style.backgroundImage = imgContainer.style.backgroundImage;
+            scrollPosition = window.scrollY;
+            window.location.hash = "overlay";
+        });
+        gallery.appendChild(imgContainer);
+    }
+
+    window.addEventListener("click", (event) => {
+        if (event.target === overlay) {
+            window.location.hash = "";
+            window.scrollTo(0, scrollPosition);
+        }
+    });
+</script>
+</body>
+</html>
