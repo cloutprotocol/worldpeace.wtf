@@ -49,6 +49,10 @@
         cursor: pointer;
         background-color: rgba(255, 255, 255, 0); /* Transparent background */
     }
+    .hex{
+        width:1500px;
+        height:auto;
+    }
     .top-left { top: 10%; left: 5%; }
     .center-left { top: 50%; left: 5%; transform: translateY(-50%); }
     .center-right { top: 50%; right: 5%; transform: translateY(-50%); }
@@ -56,10 +60,27 @@
     .bottom-left { bottom: 10%; left: 5%; }
     .bottom-right { bottom: 10%; right: 5%; }
     .center-middle { top: 50%; left: 50%; transform: translate(-50%, -50%); width: 15%; height: 30%; } /* Adjust width and height as needed */
+    @media (max-width: 768px) {
+    .clickable-area {
+        width: 30%; /* Increase size for better mobile interaction */
+        height: 20%;
+    }
+
+    /* Example of adjusting a specific clickable area */
+    .top-left {
+        top: 5%; /* Adjust position for mobile */
+        left: 3%;
+    }
+
+    .bg-img {
+        width:1200px;
+        background-position: center;
+    }
+}
+
 </style>
 </head>
 <body>
-
 <div class="bg-img">
     <a target="_blank" href="https://magiceden.io/ordinals/marketplace/le_puppettes" class="clickable-area top-left"></a>
     <a target="_blank" href="https://t.me/worldpeacesol" class="clickable-area center-left"></a>
