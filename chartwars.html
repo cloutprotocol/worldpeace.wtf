@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WORLD 🌎 PEACE ☮️ LEADERS</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Mitr:wght@200;300;400;500;600;700&display=swap');
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: "Mitr", sans-serif;
+        }
+        h1 {
+            font-family: "Mitr", sans-serif;
+            font-size: 60px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            font-family: "Barlow", sans-serif;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .market-cap {
+            background-color: #eaf1dd; /* Light green background */
+            font-weight: bold; /* Make font bold */
+            color: #005f39; /* Dark green text */
+        }
+        button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>WORLD 🌎 PEACE ☮️ LEADERS</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Token Name</th>
+                <th>Market Cap (FDV)</th>
+                <th>Price (USD)</th>
+                <th>24h Volume</th>
+                <th>24h Change (%)</th>
+                <th>Liquidity (USD)</th>
+                <th>Links</th>
+                <th>Contract</th>
+                <th>Copy</th>
+            </tr>
+        </thead>
+        <tbody id="leaderboard">
+            <!-- Data rows will be inserted here by JavaScript -->
+        </tbody>
+    </table>
+
+    <script>
+async function fetchPairData(url, isBrc20 = false) {
+    try {
+        // Prepend the URL with the CORS proxy
+        const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+        const targetUrl = isBrc20 ? proxyUrl + url : url;
+
+        const options = isBrc20 ? {
+            headers: {
+                'x-api-key': 'a093400c-fa5f-47ec-9b6c-e4d97003ae77',
+                'Content-Type': 'application/json'
+            }
+        } : {};
+
+        const response = await fetch(targetUrl, options);
+        const data = await response.json();
+        return isBrc20 ? data : data.pairs[0];
+    } catch (error) {
+        console.error('Failed to fetch or parse data:', error);
+        return null;
+    }
+}
+
+async function populateTable() {
+    const urls = [
+        'https://api.dexscreener.com/latest/dex/pairs/solana/9tGuih8Qm68Xq4VugjYFtdZJFooCxZQGFXCTKaF4iezv',
+        'https://api.dexscreener.com/latest/dex/pairs/blast/0xaB99C0e65d00D13DAA725Bd6F0e68c526b36ddc4',
+        'https://api.dexscreener.com/latest/dex/pairs/solana/DLXrjEzjgm7u35MTRbpG38CcBAD2JjRCRhwCszd6bKwf',
+        'https://api.bestinslot.xyz/v3/brc20/ticker_info?ticker=W☮'
+    ];
+
+    const results = await Promise.all(urls.map((url, index) => fetchPairData(url, index === 3)));
+    const filteredResults = results.filter(pair => pair !== null);
+    filteredResults.sort((a, b) => (b.marketcap || b.fdv || 0) - (a.marketcap || a.fdv || 0));
+
+    const tbody = document.getElementById('leaderboard');
+    filteredResults.forEach((pair, index) => {
+        const isBrc20 = index === results.length - 1;
+        const row = document.createElement('tr');
+        if (!isBrc20) {
+            row.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${pair.baseToken.name} (${pair.baseToken.symbol})</td>
+                <td class="market-cap">$${(pair.fdv || 0).toLocaleString()}</td>
+                <td>$${parseFloat(pair.priceUsd || 0).toFixed(6)}</td>
+                <td>$${(pair.volume?.h24 || 0).toLocaleString()}</td>
+                <td>${(pair.priceChange?.h24 || 0).toFixed(2)}%</td>
+                <td>$${(pair.liquidity?.usd || 0).toLocaleString()}</td>
+                <td><a href='${pair.info?.websites?.[0]?.url || "#"}' target='_blank'>Website</a> | 
+                    <a href='${pair.info?.socials?.[0]?.url || "#"}' target='_blank'>${pair.info?.socials?.[0]?.type || "Social"}</a></td>
+                <td>${pair.baseToken.address}</td>
+                <td><button onclick="copyToClipboard('${pair.baseToken.address}')">Copy</button></td>
+            `;
+        } else {
+            // Handle the BRC-20 data here for the ticker "W☮"
+            row.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${pair.ticker}</td>
+                <td class="market-cap">$${(pair.marketcap || 0).toLocaleString()}</td>
+                <td>$${(pair.min_listed_unit_price || 0)}</td>
+                <td>$${(pair.total_sale_info?.vol_24h || 0).toLocaleString()}</td>
+                <td>${(pair.priceChange?.h24 || 0).toFixed(2)}%</td>
+                <td>$${(pair.liquidity || 0).toLocaleString()}</td>
+                <td> - </td>
+                <td>${' - '}</td>
+                <td><button onclick="copyToClipboard('${' - '}'">Copy</button></td>
+            `;
+        }
+        tbody.appendChild(row);
+    });
+}
+
+        document.addEventListener('DOMContentLoaded', populateTable);
+    </script>
+    <marquee>BRC-20 ARE COMING https://x.com/WorldPeaceBTC</marquee>
+</body>
+</html>
